@@ -89,7 +89,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
     c{k} = [S(k).Genus];
     end
     ro=unique(c);
-    set(handles.listaRodz,'String',ro') %nie zmieniaæ pod ¿adnym pozorem - ten kod wreszcie dzia³a! :-)
+    set(handles.listaRodz,'String',ro+'rororoma') %nie zmieniaæ pod ¿adnym pozorem - ten kod wreszcie dzia³a! :-)
+    %tu bêdzie switchcase dla listy gatunków
+    
     
   %rawdata1=dataset('Data',filename1); 
   %rodz=txt(unique(ds(:,3)));

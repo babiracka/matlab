@@ -22,7 +22,7 @@ function varargout = GUIprojekt81(varargin)
 
 % Edit the above text to modify the response to help GUIprojekt81
 
-% Last Modified by GUIDE v2.5 11-Jan-2015 14:14:23
+% Last Modified by GUIDE v2.5 11-Jan-2015 22:26:27
 
 
 % Begin initialization code - DO NOT EDIT
@@ -78,7 +78,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%load('bazaAnim.mat')%%%
 [filename1,filepath1]=uigetfile({'*.csv','Pliki *.CSV z danymi'},...
   'Select Data File 1');
   cd(filepath1);
@@ -90,24 +89,32 @@ function pushbutton1_Callback(hObject, eventdata, handles)
     end
     ro=unique(c);
     set(handles.listaRodz,'String',ro) %nie zmieniaæ pod ¿adnym pozorem - ten kod wreszcie dzia³a! :-)
-   
+     for z = 1:length(S)
+    d{z} = [S(z).Genus S(z).species];
+     end
+    ga=unique(d);
+   set(handles.listaGat,'String',ga)
+   wybr=get(handles.listaRodz,'String')
+   for i=1:length(ga)
+  % for i=1:length(ro)
+       
     %tu bêdzie switchcase dla listy gatunków
-    
-    
-  %rawdata1=dataset('Data',filename1); 
-  %rodz=txt(unique(ds(:,3)));
-  %gat=unique(ds(:,3:4));
-  %for i=1:length(rodz)
-   %   str1=rodz(i,:)
-  %end
-  %set(handles.listaRodz,'String',str1);
-  %set(handles.listbox1,'String', rodz.Properties.VarNames);
-  %set(handles.listbox1,'String', rodz);
-  %for i=1:length(rodz)
-  %POPRAW gat=unique(filename1(i,4));
-  %end
-  
+    %jak rodzaj 'taki' -> gatunki 'taki''takie'
+    %else set(handles.listaGat, 'Enable','off')
 
+% --- Executes when selected object is changed in uipanel7.
+function uipanel7_SelectionChangeFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in uipanel7 
+% eventdata  structure with the following fields (see UIBUTTONGROUP)
+%	EventName: string 'SelectionChanged' (read only)
+%	OldValue: handle of the previously selected object or empty if none was selected
+%	NewValue: handle of the currently selected object
+% handles    structure with handles and user data (see GUIDATA)
+if (get(handles.rbgat,'Value') == 1)
+  set(handles.listaGat,'Enable', 'on')
+elseif (get(handles.rbro,'Value') == 1)
+  set(handles.listaGat,'Enable','off')
+end
 
 
 % --- Executes on key press with focus on pushbutton1 and none of its controls.
@@ -228,3 +235,5 @@ function wylacz_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(gcf);
+
+

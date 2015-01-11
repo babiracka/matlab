@@ -95,8 +95,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
     ga=unique(d);
    set(handles.listaGat,'String',ga)
    wybr=get(handles.listaRodz,'String')
-   for i=1:length(ga)
-       strncmp(wybr,ro,5)
+   %for i=1:length(ga)
+     %  strncmp(wybr,ro,5)
   % for i=1:length(ro)
        
     %tu bêdzie switchcase dla listy gatunków

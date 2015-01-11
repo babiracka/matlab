@@ -24,6 +24,7 @@ function varargout = GUIprojekt81(varargin)
 
 % Last Modified by GUIDE v2.5 11-Jan-2015 14:14:23
 
+
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
@@ -72,10 +73,6 @@ function varargout = GUIprojekt81_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
-
-
-
-
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
@@ -86,6 +83,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
   'Select Data File 1');
   cd(filepath1);
   ds = dataset('File',filename1,'Delimiter',',');
+
   S=dataset2struct(ds); 
     for k = 1:length(S)
     c{k} = [S(k).Genus];
@@ -186,7 +184,6 @@ function radiobtng_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
 % --------------------------------------------------------------------
 function plikMenu_Callback(hObject, eventdata, handles)
 % hObject    handle to plikMenu (see GCBO)
@@ -228,5 +225,3 @@ function wylacz_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(gcf);
-
-% Hint: get(hObject,'Value') returns toggle state of radiobtng

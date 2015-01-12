@@ -8,6 +8,9 @@
  end
 
     ro=unique(c);
+   % for i=1:length(ro)
+    cRodz=['Wybierz rodzaj',ro]
+    %end
      for z = 1:length(S)
     d{z} = [S(z).Genus S(z).species];
      end

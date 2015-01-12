@@ -1,0 +1,17 @@
+%tu bêdzie switchcase dla listy gatunków
+    %jak rodzaj 'taki' -> gatunki 'taki''takie'
+    %przypadek bazowy: if (nie zosta³a zmieniona wartoœæ? 
+    % user nie zmieni³ wartoœci listaRodz
+    %Ale do tego muszê ustawiæ stringa 'wybierz rodzaj' i do³¹czyæ go do ro?? 
+    %itd. i wtedy set(handles.listaGat, 'Enable','off')  done => ok
+        %tu bêdzie switchcase dla listy gatunków
+    %jak rodzaj 'taki' -> gatunki 'taki''takie'
+    % else
+    % switch get(handles.listaRodz,'String')
+    % case 
+    
+    if (get(handles.listaRodz,'String'=='Wybierz rodzaj')&&get(handles.rbgat,'Value'==0))
+        set(handles.listaGat,'Enable','off')
+    else
+        switch 
+        

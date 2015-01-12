@@ -88,8 +88,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
     c{k} = [S(k).Genus];
     end
     ro=unique(c);
-    set(handles.listaRodz,'String',ro) %nie zmieniaæ pod ¿adnym pozorem - ten kod wreszcie dzia³a! :-)
-     for z = 1:length(S)
+    cRodz=['Wybierz rodzaj',ro]
+    set(handles.listaRodz,'String',cRodz) %nie zmieniaæ pod ¿adnym pozorem - ten kod wreszcie dzia³a! :-)
+    %ale zrób konkatenacjê "Wybierz rodzaj" i wartoœci 'ro' 
+    for z = 1:length(S)
     d{z} = [S(z).Genus S(z).species];
      end
     ga=unique(d);
@@ -101,7 +103,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
        
     %tu bêdzie switchcase dla listy gatunków
     %jak rodzaj 'taki' -> gatunki 'taki''takie'
-    %else set(handles.listaGat, 'Enable','off')
+    %przypadek bazowy: if (nie zosta³a zmieniona wartoœæ? 
+    % user nie zmieni³ wartoœci listaRodz
+    %Ale do tego muszê ustawiæ stringa 'wybierz rodzaj' i do³¹czyæ go do ro?? 
+    %itd. i wtedy set(handles.listaGat, 'Enable','off')
+        %tu bêdzie switchcase dla listy gatunków
+    %jak rodzaj 'taki' -> gatunki 'taki''takie'
+    % else
+    % switch get(handles.listaRodz,'String')
+    % case 
 
 % --- Executes when selected object is changed in uipanel7.
 function uipanel7_SelectionChangeFcn(hObject, eventdata, handles)
@@ -236,5 +246,3 @@ function wylacz_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(gcf);
-
-

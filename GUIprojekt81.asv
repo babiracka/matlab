@@ -88,8 +88,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
     c{k} = [S(k).Genus];
     end
     ro=unique(c);
-    set(handles.listaRodz,'String',ro) %nie zmieniaæ pod ¿adnym pozorem - ten kod wreszcie dzia³a! :-)
-    %ale zrób konkatenacjê "Wybierz rodzaj" i wartoœci 'ro' 
+    cRodz=['Wybierz rodzaj',ro]
+    set(handles.listaRodz,'String',cRodz) %nie zmieniaæ pod ¿adnym pozorem - ten kod wreszcie dzia³a! :-)
     for z = 1:length(S)
     d{z} = [S(z).Genus S(z).species];
      end
@@ -111,6 +111,11 @@ function pushbutton1_Callback(hObject, eventdata, handles)
     % else
     % switch get(handles.listaRodz,'String')
     % case 
+     if (get(handles.listaRodz,'String'=='Wybierz rodzaj')&&get(handles.rbgat,'Value'==0))
+        set(handles.listaGat,'Enable','off')
+    elseif (get(handles.listaRodz,'String'=='Wybierz rodzaj')&&get(handles.rbgat,'Value'==1))
+        set(handles.listaGat,'Enable','on','String','Proszê najpierw wybraæ rodzaj')
+     end
 
 % --- Executes when selected object is changed in uipanel7.
 function uipanel7_SelectionChangeFcn(hObject, eventdata, handles)

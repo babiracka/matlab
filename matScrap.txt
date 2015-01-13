@@ -1,3 +1,7 @@
+﻿if 'Analiza dla gatunku'&&'Wybierz rodzaj'=>wyświetl'Proszę wybrać rodzaj' w wyborze gatunków
+Po wybraniu rodzaju set(handles.listaGat,'Enable','on')
+
+
 for i=1:length(rodz)
 data(i).id=rodz(i);
 data(i).name=(rodz.CompoundName(i));

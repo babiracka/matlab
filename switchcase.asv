@@ -12,6 +12,8 @@
     
     if (get(handles.listaRodz,'String'=='Wybierz rodzaj')&&get(handles.rbgat,'Value'==0))
         set(handles.listaGat,'Enable','off')
+    elseif (get(handles.listaRodz,'String'=='Wybierz rodzaj')&&get(handles.rbgat,'Value'==1))
+        set(handles.listaGat,'Enable','on','String','Proszê najpierw wybraæ rodzaj')
     else
         switch 
         

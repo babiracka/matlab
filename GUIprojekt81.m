@@ -28,11 +28,11 @@ function varargout = GUIprojekt81(varargin)
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @GUIprojekt81_OpeningFcn, ...
-                   'gui_OutputFcn',  @GUIprojekt81_OutputFcn, ...
-                   'gui_LayoutFcn',  [] , ...
-                   'gui_Callback',   []);
+    'gui_Singleton',  gui_Singleton, ...
+    'gui_OpeningFcn', @GUIprojekt81_OpeningFcn, ...
+    'gui_OutputFcn',  @GUIprojekt81_OutputFcn, ...
+    'gui_LayoutFcn',  [] , ...
+    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -59,12 +59,13 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+
 % UIWAIT makes GUIprojekt81 wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = GUIprojekt81_OutputFcn(hObject, eventdata, handles) 
+function varargout = GUIprojekt81_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -79,73 +80,85 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 [filename1,filepath1]=uigetfile({'*.csv','Pliki *.CSV z danymi'},...
-  'Select Data File 1');
-  cd(filepath1);
-  ds = dataset('File',filename1,'Delimiter',',');
-
-  S=dataset2struct(ds); 
-    for k = 1:length(S)
+    'Select Data File 1');
+cd(filepath1);
+ds = dataset('File',filename1,'Delimiter',',');
+datf=dataset2struct(ds);
+setGlobalS(datf);
+global S
+for k = 1:length(S)
     c{k} = [S(k).Genus];
-    end
-    ro=unique(c);
-    cRodz=['Wybierz rodzaj',ro]
-    set(handles.listaRodz,'String',cRodz) %nie zmieniaæ pod ¿adnym pozorem - ten kod wreszcie dzia³a! :-)
-    for z = 1:length(S)
-    d{z} = [S(z).Genus S(z).species];
-     end
-    ga=unique(d);
-   set(handles.listaGat,'String',ga)
-  % wybr=get(handles.listaRodz,'String')
-   %for i=1:length(ga)
-     %  strncmp(wybr,ro,5)
-  % for i=1:length(ro)
-       
-    %tu bêdzie switchcase dla listy gatunków
-    %jak rodzaj 'taki' -> gatunki 'taki''takie'
-    %przypadek bazowy: if (nie zosta³a zmieniona wartoœæ? 
-    % user nie zmieni³ wartoœci listaRodz
-    %Ale do tego muszê ustawiæ stringa 'wybierz rodzaj' i do³¹czyæ go do ro?? 
-    %itd. i wtedy set(handles.listaGat, 'Enable','off')
-        %tu bêdzie switchcase dla listy gatunków
-    %jak rodzaj 'taki' -> gatunki 'taki''takie'
-    % else
-    % switch get(handles.listaRodz,'String')
-    % case 
+end
+ro=unique(c);
+cRodz=['Wybierz rodzaj',ro];
+set(handles.listaRodz,'String',cRodz) %nie zmieniaæ pod ¿adnym pozorem - ten kod wreszcie dzia³a! :-)
+
+
+% wybr=get(handles.listaRodz,'String')
+%for i=1:length(ga)
+%  strncmp(wybr,ro,5)
+% for i=1:length(ro)
+
+%tu bêdzie switchcase dla listy gatunków
+%jak rodzaj 'taki' -> gatunki 'taki''takie'
+%przypadek bazowy: if (nie zosta³a zmieniona wartoœæ?
+% user nie zmieni³ wartoœci listaRodz
+%Ale do tego muszê ustawiæ stringa 'wybierz rodzaj' i do³¹czyæ go do ro??
+%itd. i wtedy set(handles.listaGat, 'Enable','off')
+%tu bêdzie switchcase dla listy gatunków
+%jak rodzaj 'taki' -> gatunki 'taki''takie'
+% else
+% switch get(handles.listaRodz,'String')
+% case
 %     if (get(handles.listaRodz,'String'=='Wybierz rodzaj')&&get(handles.rbgat,'Value'==0))
- %       set(handles.listaGat,'Enable','off')
-  %  elseif (get(handles.listaRodz,'String'=='Wybierz rodzaj')&&get(handles.rbgat,'Value'==1))
-   %     set(handles.listaGat,'Enable','on','String','Proszê najpierw wybraæ rodzaj')
-    % end
+%       set(handles.listaGat,'Enable','off')
+%  elseif (get(handles.listaRodz,'String'=='Wybierz rodzaj')&&get(handles.rbgat,'Value'==1))
+%     set(handles.listaGat,'Enable','on','String','Proszê najpierw wybraæ rodzaj')
+% end
 
 % --- Executes when selected object is changed in uipanel7.
 function uipanel7_SelectionChangeFcn(hObject, eventdata, handles)
-% hObject    handle to the selected object in uipanel7 
+% hObject    handle to the selected object in uipanel7
 % eventdata  structure with the following fields (see UIBUTTONGROUP)
 %	EventName: string 'SelectionChanged' (read only)
 %	OldValue: handle of the previously selected object or empty if none was selected
 %	NewValue: handle of the currently selected object
 % handles    structure with handles and user data (see GUIDATA)
 if (get(handles.rbgat,'Value') == 1)
-  set(handles.listaGat,'Enable', 'on')
+    set(handles.listaGat,'Enable', 'on')
 elseif (get(handles.rbro,'Value') == 1)
-  set(handles.listaGat,'Enable','off')
+    set(handles.listaGat,'Enable','off')
 end
 
 
-% --- Executes on key press with focus on pushbutton1 and none of its controls.
-function pushbutton1_KeyPressFcn(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
-% eventdata  structure with the following fields (see UICONTROL)
-%	Key: name of the key that was pressed, in lower case
-%	Character: character interpretation of the key(s) that was pressed
-%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
-% handles    structure with handles and user data (see GUIDATA)
-% --- Executes on selection change in listaRodz.
+
 function listaRodz_Callback(hObject, eventdata, handles)
 % hObject    handle to listaRodz (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
- 
+global S
+for z = 1:length(S)
+    d{z} = [S(z).Genus S(z).species];
+end
+ga=unique(d);
+set(handles.listaGat,'String',ga)
+ul=length(ga);
+%%%
+wybRodz=get(handles.listaRodz,'String');
+porS=(strcmp(wybRodz,'Wybierz rodzaj'));
+rbgatVal=(get(handles.rbgat,'Value'));
+if ((porS==1)&(rbgatVal==0))
+    set(handles.listaGat,'Enable','off')
+elseif ((porS==1)&(rbgatVal==1))
+    set(handles.listaGat,'Enable','on','String','Najpierw wybierz rodzaj')
+else
+    for u=1:ul
+        if strncmp(wybRodz,ga(ul),6)==1
+            set(handles.listaGat,'Value',ga(ul))
+        end
+    end
+end
+%%%
 
 
 % Hints: contents = cellstr(get(hObject,'String')) returns listaRodz contents as cell array
@@ -197,9 +210,9 @@ function radiobtnr_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 %if (get(handles.radiobtng,'Value') == 1)
-  %set(handles.listaGat,'Enable', 'on')
-   % elseif (get(handles.radiobtnr,'Value') == 1)
-    %    set(handles.listaGat,'Enable','off')
+%set(handles.listaGat,'Enable', 'on')
+% elseif (get(handles.radiobtnr,'Value') == 1)
+%    set(handles.listaGat,'Enable','off')
 %end
 % Hint: get(hObject,'Value') returns toggle state of radiobtnr
 

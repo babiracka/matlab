@@ -24,3 +24,16 @@ if (get(handles.radiobutton1,'Value') == 0 && get(handles.radiobutton2,'Value') 
 
 
 For cell arrays, curly braces ({}) are used to extract the contents of the cells, while parentheses (()) are used to extract a subset of the cells (that is, the result is also a cell array).
+if S.species=='merriami'
+
+
+Chyba totalnie nie działa
+function Indeksy( gen )
+%UNTITLED5 Summary of this function goes here
+%   Detailed explanation goes here
+gen=get(handles.listaRodz,'Value')
+for g=1:length(S)
+    if strcmp(gen,S(g).Genus)==1
+    indeksy=[S(g).species]
+    end
+end
